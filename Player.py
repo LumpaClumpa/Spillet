@@ -1,10 +1,7 @@
 import pygame
-import os
+import math
 
 class PlayerClass:
-
-    xSpeed=0
-    ySpeed=0
     maxSpeed=5
     width=50
     height=50
@@ -21,28 +18,15 @@ class PlayerClass:
         self.theScreen=screen
         self.screenWidth = self.theScreen.get_size()[0] #
         self.screenHeight = self.theScreen.get_size()[1]
-        #self.terrainCollection=terrainCollection
 
     def update(self):
+        up = pygame.key.get_pressed()[pygame.K_UP] or pygame.key.get_pressed()[pygame.K_w]
+        down = pygame.key.get_pressed()[pygame.K_DOWN] or pygame.key.get_pressed()[pygame.K_s]
+        left = pygame.key.get_pressed()[pygame.K_LEFT] or pygame.key.get_pressed()[pygame.K_a]
+        right = pygame.key.get_pressed()[pygame.K_RIGHT] or pygame.key.get_pressed()[pygame.K_d]
 
-        self.futureX=self.x+self.xSpeed
-        self.futureY=self.y+self.ySpeed
-
-        xWillCollide = False
-        yWillCollide = False
-
-        #for tile in self.terrainCollection:
-        #    #if the player is within the x coordinates of a wall tile, and future Y coordinate is inside the wall:
-        #    if self.x + self.width > tile.x and self.x < tile.x + tile.width and self.futureY + self.height > tile.y and self.futureY < tile.y + tile.height:
-        #        yWillCollide=True
-        #    # if the player is within the Y coordinates of a wall tile, and future X coordinate is inside the wall:
-        #    if self.y + self.height > tile.y and self.y < tile.y + tile.height and self.futureX + self.width > tile.x and self.futureX < tile.x + tile.width:
-        #        xWillCollide=True
-
-        if not xWillCollide:
-            self.x = self.futureX
-        if not yWillCollide:
-            self.y = self.futureY
+        self.y += round((-self.maxSpeed if not left ^ right else (-math.sqrt(2)/2) * self.maxSpeed) if up and not down else ((self.maxSpeed if not left ^ right else (math.sqrt(2)/2) * self.maxSpeed) if not up and down else 0))
+        self.x += round((-self.maxSpeed if not up ^ down else (-math.sqrt(2)/2) * self.maxSpeed) if left and not right else ((self.maxSpeed if not up ^ down else (math.sqrt(2)/2) * self.maxSpeed) if not left and right else 0))
 
         #safety to prevent overshoot:
         if self.x+self.width > self.screenWidth:

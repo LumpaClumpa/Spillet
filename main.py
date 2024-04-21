@@ -84,28 +84,28 @@ while not done:
             done = True
         #-------PLAYER CONTROLS---------
         #KEY PRESSES:
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                playerObject.ySpeed -= playerObject.maxSpeed
-            if event.key == pygame.K_DOWN:
-                playerObject.ySpeed += playerObject.maxSpeed
-            if event.key == pygame.K_LEFT:
-                playerObject.xSpeed -= playerObject.maxSpeed
-            if event.key == pygame.K_RIGHT:
-                playerObject.xSpeed += playerObject.maxSpeed
+        #if event.type == pygame.KEYDOWN:
+        #    if event.key == pygame.K_UP:
+        #        playerObject.ySpeed -= playerObject.maxSpeed
+        #    if event.key == pygame.K_DOWN:
+        #        playerObject.ySpeed += playerObject.maxSpeed
+        #    if event.key == pygame.K_LEFT:
+        #        playerObject.xSpeed -= playerObject.maxSpeed
+        #    if event.key == pygame.K_RIGHT:
+        #        playerObject.xSpeed += playerObject.maxSpeed
                 #Skud:                          .. Men kun når spilleren bevæger sig:
             #if event.key == pygame.K_SPACE: #and (playerObject.xSpeed !=0 or playerObject.ySpeed !=0):
             #    shots.append(ShotClass(surface, spawnPosX=playerObject.x + playerObject.width / 2, spawnPosY=playerObject.y + playerObject.height / 2, playerSpeedX=playerObject.xSpeed, playerSpeedY=playerObject.ySpeed))
         #KEY RELEASES:
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP:
-                playerObject.ySpeed += playerObject.maxSpeed
-            if event.key == pygame.K_DOWN:
-                playerObject.ySpeed -= playerObject.maxSpeed
-            if event.key == pygame.K_LEFT:
-                playerObject.xSpeed += playerObject.maxSpeed
-            if event.key == pygame.K_RIGHT:
-                playerObject.xSpeed -= playerObject.maxSpeed
+        #if event.type == pygame.KEYUP:
+        #    if event.key == pygame.K_UP:
+        #        playerObject.ySpeed += playerObject.maxSpeed
+        #    if event.key == pygame.K_DOWN:
+        #        playerObject.ySpeed -= playerObject.maxSpeed
+        #    if event.key == pygame.K_LEFT:
+        #        playerObject.xSpeed += playerObject.maxSpeed
+        #    if event.key == pygame.K_RIGHT:
+        #        playerObject.xSpeed -= playerObject.maxSpeed
     #debug: print out unused pygame events
     #else:
     #        print(event)
