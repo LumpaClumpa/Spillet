@@ -1,7 +1,7 @@
 import pygame
 import math
 
-class PlayerClass:
+class Player:
     maxSpeed=5
     width=50
     height=50
