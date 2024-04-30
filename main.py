@@ -18,9 +18,6 @@ def collisionChecker(firstGameObject, secondGameObject):
             return True
         return False
 
-for i in range(number_of_enemies):
-    spawnEnemy()
-
 done = False
 while not done:
     for event in pygame.event.get():
