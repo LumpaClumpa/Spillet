@@ -8,8 +8,7 @@ class PlayerClass:
     color=(0, 128, 255)
     points=0
 
-    #sfxPath = os.path.normpath(os.path.join('assets', 'sfx', 'aaw.wav')) #kan også være .ogg eller .mp3
-    #collisionSFX = pygame.mixer.Sound(sfxPath)
+
 
 
     def __init__(self,screen,xpos,ypos):#,terrainCollection):
@@ -28,7 +27,7 @@ class PlayerClass:
         self.y += round((-self.maxSpeed if not left ^ right else (-math.sqrt(2)/2) * self.maxSpeed) if up and not down else ((self.maxSpeed if not left ^ right else (math.sqrt(2)/2) * self.maxSpeed) if not up and down else 0))
         self.x += round((-self.maxSpeed if not up ^ down else (-math.sqrt(2)/2) * self.maxSpeed) if left and not right else ((self.maxSpeed if not up ^ down else (math.sqrt(2)/2) * self.maxSpeed) if not left and right else 0))
 
-        #safety to prevent overshoot:
+
         if self.x+self.width > self.screenWidth:
             self.x = self.screenWidth-self.width
         if self.y+self.height > self.screenHeight:
