@@ -8,7 +8,7 @@ class PlayerClass:
     color=(0, 128, 255)
     points=0
 
-    def __init__(self,screen,xpos,ypos):#,terrainCollection):
+    def __init__(self,screen,xpos,ypos):
         self.x=xpos
         self.y=ypos
         self.theScreen=screen
