@@ -8,9 +8,6 @@ class PlayerClass:
     color=(0, 128, 255)
     points=0
 
-
-
-
     def __init__(self,screen,xpos,ypos):#,terrainCollection):
         self.x=xpos
         self.y=ypos
@@ -26,7 +23,6 @@ class PlayerClass:
 
         self.y += round((-self.maxSpeed if not left ^ right else (-math.sqrt(2)/2) * self.maxSpeed) if up and not down else ((self.maxSpeed if not left ^ right else (math.sqrt(2)/2) * self.maxSpeed) if not up and down else 0))
         self.x += round((-self.maxSpeed if not up ^ down else (-math.sqrt(2)/2) * self.maxSpeed) if left and not right else ((self.maxSpeed if not up ^ down else (math.sqrt(2)/2) * self.maxSpeed) if not left and right else 0))
-
 
         if self.x+self.width > self.screenWidth:
             self.x = self.screenWidth-self.width
