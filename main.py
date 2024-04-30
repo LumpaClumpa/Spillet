@@ -1,23 +1,11 @@
 import pygame
-import os
+from Player import PlayerClass
+from random import randint as rando
 
 pygame.init()
-
-from Player import PlayerClass
-
-from Enemy import EnemyClass
-
-
-from random import randint as rando
 clock = pygame.time.Clock()
 
-
-
-
-enemies=[]
-
 gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.display.Info().current_h
-
 surface = pygame.Surface((1920, 1080))
 display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
 
