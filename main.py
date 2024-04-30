@@ -1,5 +1,5 @@
 import pygame
-from Player import PlayerClass
+from Player import Player
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -8,7 +8,7 @@ gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.disp
 surface = pygame.Surface((1920, 1080))
 display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
 
-playerObject = PlayerClass(surface, xpos=100, ypos=100)
+playerObject = Player(surface, xpos=100, ypos=100)
 def collisionChecker(firstGameObject, secondGameObject):
         if firstGameObject.x + firstGameObject.width > secondGameObject.x and\
                 firstGameObject.x < secondGameObject.x + secondGameObject.width and\
