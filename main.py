@@ -1,6 +1,5 @@
 import pygame
 from Player import PlayerClass
-from random import randint as rando
 
 pygame.init()
 clock = pygame.time.Clock()
