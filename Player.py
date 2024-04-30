@@ -1,15 +1,14 @@
 import pygame
-import os
+import math
 
 class PlayerClass:
-
-    xSpeed=0
-    ySpeed=0
     maxSpeed=5
     width=50
     height=50
     color=(0, 128, 255)
     points=0
+
+
 
 
     def __init__(self,screen,xpos,ypos):#,terrainCollection):
@@ -18,23 +17,17 @@ class PlayerClass:
         self.theScreen=screen
         self.screenWidth = self.theScreen.get_size()[0] #
         self.screenHeight = self.theScreen.get_size()[1]
-        #self.terrainCollection=terrainCollection
 
     def update(self):
+        up = pygame.key.get_pressed()[pygame.K_UP] or pygame.key.get_pressed()[pygame.K_w]
+        down = pygame.key.get_pressed()[pygame.K_DOWN] or pygame.key.get_pressed()[pygame.K_s]
+        left = pygame.key.get_pressed()[pygame.K_LEFT] or pygame.key.get_pressed()[pygame.K_a]
+        right = pygame.key.get_pressed()[pygame.K_RIGHT] or pygame.key.get_pressed()[pygame.K_d]
 
-        self.futureX=self.x+self.xSpeed
-        self.futureY=self.y+self.ySpeed
-
-        xWillCollide = False
-        yWillCollide = False
+        self.y += round((-self.maxSpeed if not left ^ right else (-math.sqrt(2)/2) * self.maxSpeed) if up and not down else ((self.maxSpeed if not left ^ right else (math.sqrt(2)/2) * self.maxSpeed) if not up and down else 0))
+        self.x += round((-self.maxSpeed if not up ^ down else (-math.sqrt(2)/2) * self.maxSpeed) if left and not right else ((self.maxSpeed if not up ^ down else (math.sqrt(2)/2) * self.maxSpeed) if not left and right else 0))
 
 
-        if not xWillCollide:
-            self.x = self.futureX
-        if not yWillCollide:
-            self.y = self.futureY
-
-        #safety to prevent overshoot:
         if self.x+self.width > self.screenWidth:
             self.x = self.screenWidth-self.width
         if self.y+self.height > self.screenHeight:
