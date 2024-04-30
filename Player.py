@@ -1,19 +1,12 @@
+from Object import Object
 import pygame
 import math
 
-class Player:
-    maxSpeed=5
-    width=50
-    height=50
-    color=(0, 128, 255)
-    points=0
+class Player(Object):
+    speed=5
 
-    def __init__(self,screen,xpos,ypos):
-        self.x=xpos
-        self.y=ypos
-        self.theScreen=screen
-        self.screenWidth = self.theScreen.get_size()[0] #
-        self.screenHeight = self.theScreen.get_size()[1]
+    def __init__(self, screen, x, y):
+        super().__init__(screen, x, y, (0, 128, 255), 50, 50)
 
     def update(self):
         up = pygame.key.get_pressed()[pygame.K_UP] or pygame.key.get_pressed()[pygame.K_w]
@@ -21,17 +14,14 @@ class Player:
         left = pygame.key.get_pressed()[pygame.K_LEFT] or pygame.key.get_pressed()[pygame.K_a]
         right = pygame.key.get_pressed()[pygame.K_RIGHT] or pygame.key.get_pressed()[pygame.K_d]
 
-        self.y += round((-self.maxSpeed if not left ^ right else (-math.sqrt(2)/2) * self.maxSpeed) if up and not down else ((self.maxSpeed if not left ^ right else (math.sqrt(2)/2) * self.maxSpeed) if not up and down else 0))
-        self.x += round((-self.maxSpeed if not up ^ down else (-math.sqrt(2)/2) * self.maxSpeed) if left and not right else ((self.maxSpeed if not up ^ down else (math.sqrt(2)/2) * self.maxSpeed) if not left and right else 0))
+        self.y += round((-self.speed if not left ^ right else (-math.sqrt(2) / 2) * self.speed) if up and not down else ((self.speed if not left ^ right else (math.sqrt(2) / 2) * self.speed) if not up and down else 0))
+        self.x += round((-self.speed if not up ^ down else (-math.sqrt(2) / 2) * self.speed) if left and not right else ((self.speed if not up ^ down else (math.sqrt(2) / 2) * self.speed) if not left and right else 0))
 
-        if self.x+self.width > self.screenWidth:
-            self.x = self.screenWidth-self.width
-        if self.y+self.height > self.screenHeight:
-            self.y = self.screenHeight-self.height
+        if self.x+self.width > self.screen.get_size()[0]:
+            self.x = self.screen.get_size()[0]-self.width
+        if self.y+self.height > self.screen.get_size()[1]:
+            self.y = self.screen.get_size()[1]-self.height
         if self.x<0:
             self.x=0
         if self.y<0:
             self.y=0
-
-    def draw(self):
-        pygame.draw.rect(self.theScreen, self.color, pygame.Rect(self.x, self.y, self.width, self.height))
