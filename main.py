@@ -18,17 +18,6 @@ def collisionChecker(firstGameObject, secondGameObject):
             return True
         return False
 
-enemyMaxSpeed = 15
-number_of_enemies = 5
-def spawnEnemy():
-    enemies.append(EnemyClass(surface,
-                              spawnPosX=rando(0, gameWindowWidth),
-                              spawnPosY=rando(0, gameWindowHeight),
-                              speedX=rando(-enemyMaxSpeed, enemyMaxSpeed),
-                              speedY=rando(-enemyMaxSpeed, enemyMaxSpeed))
-                   )
-
-
 for i in range(number_of_enemies):
     spawnEnemy()
 
@@ -42,21 +31,8 @@ while not done:
 
     playerObject.update()
 
-    for enemy in enemies:
-        enemyIsDead = False
-        enemy.update()
-        if enemy.x>gameWindowWidth or enemy.y>gameWindowHeight or enemy.x<0 or enemy.y<0:
-            enemyIsDead=True
-
-        if enemyIsDead:
-            enemies.remove(enemy)
-            spawnEnemy()
-
     surface.fill((0, 0, 0))
     playerObject.draw()
-
-    for enemy in enemies:
-        enemy.draw()
 
     clock.tick(60)
 
