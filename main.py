@@ -37,10 +37,9 @@ while not done:
     playerObject.draw()
     text_surface = best_font.render('Coins:', False, (255, 255, 255))
 
-
     clock.tick(60)
 
     display.blit(pygame.transform.scale(surface, (gameWindowWidth, gameWindowHeight)), (0, 0))
     display.blit(text_surface, (70, 10))
-    display.blit(img, (0, 0))
+    display.blit(img, (2, 2))
     pygame.display.flip()
