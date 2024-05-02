@@ -2,6 +2,8 @@ import pygame
 from Player import Player
 
 pygame.init()
+pygame.font.init()
+best_font = pygame.font.SysFont('Comic Sans MS', 24)
 clock = pygame.time.Clock()
 
 gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.display.Info().current_h
@@ -29,8 +31,11 @@ while not done:
 
     surface.fill((0, 0, 0))
     playerObject.draw()
+    text_surface = best_font.render('Highscore:', False, (255, 255, 255))
+
 
     clock.tick(60)
 
     display.blit(pygame.transform.scale(surface, (gameWindowWidth, gameWindowHeight)), (0, 0))
+    display.blit(text_surface, (10, 10))
     pygame.display.flip()
