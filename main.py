@@ -1,5 +1,6 @@
 import pygame
 from Player import Player
+from Lawn import Lawn
 
 pygame.init()
 pygame.font.init()
@@ -10,14 +11,8 @@ gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.disp
 surface = pygame.Surface((1920, 1080))
 display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
 
-playerObject = Player(surface, 100, 100)
-def collisionChecker(firstGameObject, secondGameObject):
-        if firstGameObject.x + firstGameObject.width > secondGameObject.x and\
-                firstGameObject.x < secondGameObject.x + secondGameObject.width and\
-                firstGameObject.y + firstGameObject.height > secondGameObject.y and\
-                firstGameObject.y < secondGameObject.y + secondGameObject.height:
-            return True
-        return False
+playerObject = Player(surface, 0, 0)
+lawn = Lawn(surface, 192, 108)
 
 done = False
 while not done:
@@ -28,11 +23,13 @@ while not done:
             done = True
 
     playerObject.update()
+    lawn.update(playerObject)
 
     surface.fill((0, 0, 0))
+    lawn.draw(playerObject)
     playerObject.draw()
-    text_surface = best_font.render('Highscore:', False, (255, 255, 255))
 
+    text_surface = best_font.render('Highscore:', False, (255, 255, 255))
 
     clock.tick(60)
 
