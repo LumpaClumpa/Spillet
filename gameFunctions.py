@@ -1,2 +1,2 @@
-def collisionChecker(x1, y1, width1, height1, x2, y2, width2, height2):
-    return x1 + width1 > x2 and x1 < x2 + width2 and y1 + height1 > y2 and y1 < y2 + height2
+def collisionChecker(pos1, size1, pos2, size2):
+    return pos1[0] + size1[0] > pos2[0] and pos1[0] < pos2[0] + size2[0] and pos1[1] + size1[1] > pos2[1] and pos1[1] < pos2[1] + size2[1]
