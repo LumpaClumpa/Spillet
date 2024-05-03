@@ -2,6 +2,9 @@ from Player import Player
 from Lawn import Lawn
 import pygame
 import math
+import pygame
+from Lawn import Lawn
+from Player import Player
 
 pygame.init()
 pygame.font.init()
@@ -16,7 +19,7 @@ gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.disp
 surface = pygame.Surface((1920, 1080))
 display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
 
-playerObject = Player(surface, 935, 515)
+playerObject = Player(surface)
 lawn = Lawn(surface, 192, 108)
 
 speed, x, y = 7, 0, 0
@@ -34,14 +37,15 @@ while not done:
     left = pygame.key.get_pressed()[pygame.K_LEFT] or pygame.key.get_pressed()[pygame.K_a]
     right = pygame.key.get_pressed()[pygame.K_RIGHT] or pygame.key.get_pressed()[pygame.K_d]
 
-    y -= round((-speed if not left ^ right else (-math.sqrt(0.5)) * speed) if up and not down else ((speed if not left ^ right else (math.sqrt(0.5)) * speed) if not up and down else 0))
-    x -= round((-speed if not up ^ down else (-math.sqrt(0.5)) * speed) if left and not right else ((speed if not up ^ down else (math.sqrt(0.5)) * speed) if not left and right else 0))
+    y += round((-speed if not left ^ right else (-math.sqrt(0.5)) * speed) if up and not down else ((speed if not left ^ right else (math.sqrt(0.5)) * speed) if not up and down else 0))
+    x += round((-speed if not up ^ down else (-math.sqrt(0.5)) * speed) if left and not right else ((speed if not up ^ down else (math.sqrt(0.5)) * speed) if not left and right else 0))
 
     lawn.update(playerObject, [x, y])
 
     surface.fill((0, 0, 0))
     lawn.draw([x, y])
-    playerObject.draw()
+    playerObject.draw([x, y])
+
     text_surface = best_font.render('Coins:', False, (255, 255, 255))
 
     clock.tick(60)

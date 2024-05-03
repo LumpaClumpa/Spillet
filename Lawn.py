@@ -2,7 +2,7 @@ import pygame
 import gameFunctions
 
 def pos(i, j, shift):
-    return [i * 10 + shift[0], j * 10 + shift[1]]
+    return [i * 10 - shift[0], j * 10 - shift[1]]
 
 class Lawn:
     def __init__(self, screen, width, height):
