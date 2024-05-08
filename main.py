@@ -8,7 +8,7 @@ from Player import Player
 
 pygame.init()
 pygame.font.init()
-best_font = pygame.font.SysFont('Comic Sans MS', 24)
+best_font = pygame.font.SysFont('MinecraftRegular', 35)
 clock = pygame.time.Clock()
 img = pygame.image.load('assets/shoppingcart_icon.png')
 
