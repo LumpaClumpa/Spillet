@@ -13,6 +13,13 @@ class button():
         self.text = text
 
     def draw(self, win, outline=None):
+        pos = pygame.mouse.get_pos()
+
+        if self.isOver(pos):
+            self.color = (150, 150, 150)
+        else:
+            self.color = (150, 150, 150)
+
         #Det er så vi kan tegne knappen
         if outline:
             pygame.draw.rect(win, outline, (self.x - 2, self.y - 2, self.width + 4, self.height + 4), 0)

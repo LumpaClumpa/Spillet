@@ -5,6 +5,7 @@ import math
 import pygame
 from Lawn import Lawn
 from Player import Player
+from buttonClass import button
 
 pygame.init()
 pygame.font.init()
@@ -22,6 +23,8 @@ display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
 playerObject = Player(surface)
 lawn = Lawn(surface, 192, 108)
 
+shopbutton = button((50,50,50),0,0,120,92,'')
+
 speed, x, y = 7, 0, 0
 
 done = False
@@ -31,6 +34,10 @@ while not done:
             done = True
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             done = True
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if shopbutton.isOver(pygame.mouse.get_pos()):
+                print('clicked the button')
 
     up = pygame.key.get_pressed()[pygame.K_UP] or pygame.key.get_pressed()[pygame.K_w]
     down = pygame.key.get_pressed()[pygame.K_DOWN] or pygame.key.get_pressed()[pygame.K_s]
@@ -45,8 +52,9 @@ while not done:
     surface.fill((0, 0, 0))
     lawn.draw([x, y])
     playerObject.draw([x, y])
+    shopbutton.draw(surface)
 
-    text_surface = best_font.render('Coins:', False, (255, 255, 255))
+    text_surface = best_font.render('FPS: ' + str(clock.get_fps()), False, (255, 255, 255))
 
     clock.tick(60)
 
