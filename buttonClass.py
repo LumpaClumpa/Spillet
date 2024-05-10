@@ -16,7 +16,7 @@ class button():
         pos = pygame.mouse.get_pos()
 
         if self.isOver(pos):
-            self.color = (150, 150, 150)
+            self.color = (200, 200, 200)
         else:
             self.color = (150, 150, 150)
 
