@@ -1,5 +1,6 @@
 import pygame
 
+# TODO rewrite to support rendering sprites instead of colours
 class Object:
     def __init__(self, screen : pygame.surface.SurfaceType, x, y, color, radiusOrWidth, height=0):
         self.screen = screen
@@ -12,8 +13,8 @@ class Object:
             self.width = radiusOrWidth
             self.height = height
 
-    def draw(self, shift):
+    def draw(self):
         if hasattr(self, 'radius'):
-            pygame.draw.circle(self.screen, self.color, (self.x - shift[0], self.y - shift[1]), self.radius)
+            pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
         else:
-            pygame.draw.rect(self.screen, self.color, pygame.Rect(self.x - shift[0], self.y - shift[1], self.width, self.height))
+            pygame.draw.rect(self.screen, self.color, pygame.Rect(self.x, self.y, self.width, self.height))
