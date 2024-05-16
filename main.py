@@ -1,17 +1,13 @@
 import math
 import pygame
 from Player import Player
-from buttonClass import button
+from Button import Button
 from Coin import Coin
 
 pygame.init()
 pygame.font.init()
 best_font = pygame.font.SysFont('MinecraftRegular', 35)
 clock = pygame.time.Clock()
-img = pygame.image.load('assets/shoppingcart_icon.png')
-
-default_image_size = (70, 60)
-img = pygame.transform.scale(img, default_image_size)
 
 gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.display.Info().current_h
 display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
@@ -24,7 +20,10 @@ lawn.fill((65, 152, 10))
 playerObject = Player(display)
 coin = Coin(display, 100, 100)
 
-shopbutton = button((50, 50, 50), 0, 0, 120, 92, '')
+imageIdle = pygame.transform.scale(pygame.image.load('assets/shop_icon1.png'), (70, 60))
+imageHover = pygame.transform.scale(pygame.image.load('assets/shop_icon2.png'), (70, 60))
+
+shopbutton = Button(display, 0, 0, imageIdle, imageHover)
 
 speed, x, y = 7, 0, 0
 
@@ -60,14 +59,7 @@ while not done:
     if y + 50 > lawn.get_height() + 200:
         y = lawn.get_height() + 200 - 50
 
-    shopbutton.draw(button_surface)
-
     text_surface = best_font.render('Coins: ', False, (255, 255, 255))
-
-    coinx = best_font.render('CoinX: ' + str(coin.x), False, (255, 255, 255))
-    coiny = best_font.render('CoinY: ' + str(coin.y), False, (255, 255, 255))
-    xPos = best_font.render("x: " + str(x), False, (255, 255, 255)) # DEBUG
-    yPos = best_font.render("y: " + str(y), False, (255, 255, 255)) # DEBUG
 
     clock.tick(60)
 
@@ -83,12 +75,7 @@ while not done:
     coin.draw(x, y)
     playerObject.draw()
 
-    display.blit(button_surface, (0, 0))
+    shopbutton.draw()
 
     display.blit(text_surface, (70, 10))
-    display.blit(coinx, (100, 50))
-    display.blit(coiny, (100, 75))
-    display.blit(xPos, (100, 100))
-    display.blit(yPos, (100, 125))
-    display.blit(img, (2, 2))
     pygame.display.update()
