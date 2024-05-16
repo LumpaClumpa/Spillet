@@ -16,12 +16,11 @@ gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.disp
 display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
 
 button_surface = pygame.Surface((120, 92))
-player_surface = pygame.Surface((50, 50))
 background = pygame.Surface((1920, 1080))
 lawn = pygame.Surface((800, 800))
 lawn.fill((65, 152, 10))
 
-playerObject = Player(player_surface)
+playerObject = Player(display)
 
 shopbutton = button((50, 50, 50), 0, 0, 120, 92, '')
 
@@ -44,38 +43,36 @@ while not done:
     left = pygame.key.get_pressed()[pygame.K_LEFT] or pygame.key.get_pressed()[pygame.K_a]
     right = pygame.key.get_pressed()[pygame.K_RIGHT] or pygame.key.get_pressed()[pygame.K_d]
 
-    playerObject.y += round((-speed if not left ^ right else (-math.sqrt(0.5)) * speed) if up and not down else ((speed if not left ^ right else (math.sqrt(0.5)) * speed) if not up and down else 0))
-    playerObject.x += round((-speed if not up ^ down else (-math.sqrt(0.5)) * speed) if left and not right else ((speed if not up ^ down else (math.sqrt(0.5)) * speed) if not left and right else 0))
+    y += round((-speed if not left ^ right else (-math.sqrt(0.5)) * speed) if up and not down else ((speed if not left ^ right else (math.sqrt(0.5)) * speed) if not up and down else 0))
+    x += round((-speed if not up ^ down else (-math.sqrt(0.5)) * speed) if left and not right else ((speed if not up ^ down else (math.sqrt(0.5)) * speed) if not left and right else 0))
 
-    if playerObject.x < -200:
-        playerObject.x = -200
+    if x < -200:
+        x = -200
 
-    if playerObject.x + playerObject.width > lawn.get_width() + 200:
-        playerObject.x = lawn.get_width() + 200 - playerObject.width
+    if x + 50 > lawn.get_width() + 200:
+        x = lawn.get_width() + 200 - 50
 
-    if playerObject.y < -200:
-        playerObject.y = -200
+    if y < -200:
+        y = -200
 
-    if playerObject.y + playerObject.height > lawn.get_height() + 200:
-        playerObject.y = lawn.get_height() + 200 - playerObject.height
+    if y + 50 > lawn.get_height() + 200:
+        y = lawn.get_height() + 200 - 50
 
-    playerObject.draw()
     shopbutton.draw(button_surface)
 
     text_surface = best_font.render('Coins: ', False, (255, 255, 255))
 
     clock.tick(60)
 
-    clock.tick(30)
-
     display.blit(background, (0, 0))
 
-    pygame.draw.rect(lawn, (19, 133, 16), pygame.Rect(playerObject.x, playerObject.y, 50, 50))
-    region = ((playerObject.x - pygame.display.get_window_size()[0] / 2, playerObject.y - pygame.display.get_window_size()[1] / 2), pygame.display.get_window_size())
+    pygame.draw.rect(lawn, (19, 133, 16), pygame.Rect(x, y, 50, 50))
+    region = ((x - pygame.display.get_window_size()[0] / 2, y - pygame.display.get_window_size()[1] / 2), pygame.display.get_window_size())
     lawn.set_clip(region)
     display.blit(lawn, (0, 0), region)
 
-    display.blit(player_surface, (pygame.display.get_window_size()[0] / 2, pygame.display.get_window_size()[1] / 2))
+    playerObject.draw()
+
     display.blit(button_surface, (0, 0))
 
     display.blit(text_surface, (70, 10))

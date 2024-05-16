@@ -1,5 +1,12 @@
+import pygame.surface
+
 from Object import Object
 
+img2 = pygame.image.load('assets/player.png')
+
 class Player(Object):
-    def __init__(self, screen):
-        super().__init__(screen, 0, 0, (0, 128, 255), 50, 50)
+    def __init__(self, display : pygame.Surface):
+        super().__init__(display.get_width(), display.get_height(), display, 25, 25, img2)
+
+    def draw(self):
+        super().draw(0, 0)
