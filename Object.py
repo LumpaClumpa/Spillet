@@ -1,6 +1,3 @@
-import pygame
-
-# TODO rewrite to support rendering sprites instead of colours
 class Object:
     def __init__(self, screenWidth, screenHeight, display, x, y, image):
         self.display = display
