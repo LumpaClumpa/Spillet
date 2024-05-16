@@ -6,7 +6,7 @@ from Coin import Coin
 
 pygame.init()
 pygame.font.init()
-best_font = pygame.font.SysFont('MinecraftRegular', 35)
+font = pygame.font.SysFont('MinecraftRegular', 35)
 clock = pygame.time.Clock()
 
 gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.display.Info().current_h
@@ -59,7 +59,7 @@ while not done:
     if y + 50 > lawn.get_height() + 200:
         y = lawn.get_height() + 200 - 50
 
-    text_surface = best_font.render('Coins: ', False, (255, 255, 255))
+    coinsText = font.render('Coins: ', False, (255, 255, 255))
 
     clock.tick(60)
 
@@ -77,5 +77,5 @@ while not done:
 
     shopbutton.draw()
 
-    display.blit(text_surface, (70, 10))
+    display.blit(coinsText, (70, 10))
     pygame.display.update()
