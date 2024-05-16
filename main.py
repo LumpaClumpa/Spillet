@@ -2,6 +2,7 @@ import math
 import pygame
 from Player import Player
 from Button import Button
+from Coin import Coin
 
 pygame.init()
 pygame.font.init()
@@ -17,6 +18,7 @@ lawn = pygame.Surface((800, 800))
 lawn.fill((65, 152, 10))
 
 playerObject = Player(display)
+coin = Coin(display, 100, 100)
 
 imageIdle = pygame.transform.scale(pygame.image.load('assets/shop_icon1.png'), (70, 60))
 imageHover = pygame.transform.scale(pygame.image.load('assets/shop_icon2.png'), (70, 60))
@@ -68,6 +70,9 @@ while not done:
     lawn.set_clip(region)
     display.blit(lawn, (0, 0), region)
 
+    coin.update(x, y)
+
+    coin.draw(x, y)
     playerObject.draw()
 
     shopbutton.draw()
