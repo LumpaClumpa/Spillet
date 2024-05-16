@@ -2,6 +2,7 @@ import math
 import pygame
 from Player import Player
 from buttonClass import button
+from Coin import Coin
 
 pygame.init()
 pygame.font.init()
@@ -21,6 +22,7 @@ lawn = pygame.Surface((800, 800))
 lawn.fill((65, 152, 10))
 
 playerObject = Player(display)
+coin = Coin(display, 100, 100)
 
 shopbutton = button((50, 50, 50), 0, 0, 120, 92, '')
 
@@ -62,6 +64,11 @@ while not done:
 
     text_surface = best_font.render('Coins: ', False, (255, 255, 255))
 
+    coinx = best_font.render('CoinX: ' + str(coin.x), False, (255, 255, 255))
+    coiny = best_font.render('CoinY: ' + str(coin.y), False, (255, 255, 255))
+    xPos = best_font.render("x: " + str(x), False, (255, 255, 255)) # DEBUG
+    yPos = best_font.render("y: " + str(y), False, (255, 255, 255)) # DEBUG
+
     clock.tick(60)
 
     display.blit(background, (0, 0))
@@ -71,10 +78,17 @@ while not done:
     lawn.set_clip(region)
     display.blit(lawn, (0, 0), region)
 
+    coin.update(x, y)
+
+    coin.draw(x, y)
     playerObject.draw()
 
     display.blit(button_surface, (0, 0))
 
     display.blit(text_surface, (70, 10))
+    display.blit(coinx, (100, 50))
+    display.blit(coiny, (100, 75))
+    display.blit(xPos, (100, 100))
+    display.blit(yPos, (100, 125))
     display.blit(img, (2, 2))
     pygame.display.update()
