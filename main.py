@@ -7,7 +7,7 @@ import random
 
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont('MinecraftRegular', 35)
+font = pygame.font.SysFont('', 42)
 clock = pygame.time.Clock()
 
 gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.display.Info().current_h
@@ -63,7 +63,7 @@ while not done:
             if shopbutton.isOver(pygame.mouse.get_pos()):
                 shop_open = not shop_open
 
-    if frameCount % 2 == 0:
+    if frameCount % 2 == 0 and not shop_open:
         up = pygame.key.get_pressed()[pygame.K_UP] or pygame.key.get_pressed()[pygame.K_w]
         down = pygame.key.get_pressed()[pygame.K_DOWN] or pygame.key.get_pressed()[pygame.K_s]
         left = pygame.key.get_pressed()[pygame.K_LEFT] or pygame.key.get_pressed()[pygame.K_a]
@@ -111,5 +111,5 @@ while not done:
     if shop_open:
         draw_shop(pygame.display.get_surface())
 
-    display.blit(coinsText, (70, 10))
+    display.blit(coinsText, (75, 18))
     pygame.display.update()
