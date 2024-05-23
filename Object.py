@@ -6,4 +6,4 @@ class Object:
         self.image = image
 
     def draw(self, x, y):
-        self.display.blit(self.image, (self.x + (self.display.get_width()/2 - 25) - x, self.y + (self.display.get_height()/2 - 25) - y))
+        self.display.blit(self.image, (self.x + (self.display.get_width()/2 - 2) - x*10, self.y + (self.display.get_height()/2 - 2) - y*10))
