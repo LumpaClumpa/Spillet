@@ -3,6 +3,7 @@ import pygame
 from Player import Player
 from Button import Button
 from Coin import Coin
+import random
 
 pygame.init()
 pygame.font.init()
@@ -20,7 +21,22 @@ lawn = pygame.Surface(lawnSize)
 lawn.fill((65, 152, 10))
 
 playerObject = Player(display)
-coin = Coin(display, 100, 100)
+
+coins = []
+coinCount = 0
+
+
+def spawnCoin():
+    x = random.randint(0, lawn.get_width())
+    y = random.randint(0, lawn.get_height())
+    coins.append(Coin(display, x, y))
+
+
+def removeCoin(i):
+    coins.pop(i)
+
+
+spawnCoin()
 
 imageIdle = pygame.transform.scale(pygame.image.load('assets/shop_icon1.png'), (70, 60))
 imageHover = pygame.transform.scale(pygame.image.load('assets/shop_icon2.png'), (70, 60))
@@ -63,23 +79,27 @@ while not done:
     if y + 4 > lawn.get_height() + 10:
         y = lawn.get_height() + 10 - 4
 
-    coinsText = font.render('Coins: ', False, (255, 255, 255))
+    coinsText = font.render('Coins: ' + str(coinCount), False, (255, 255, 255))
 
     clock.tick(60)
     frameCount += 1
 
     display.blit(background, (0, 0))
 
-    pygame.draw.rect(lawn, (19, 133, 16), pygame.Rect(x, y, 4, 4))
-    region = ((x*10 - pygame.display.get_window_size()[0] / 2, y*10 - pygame.display.get_window_size()[1] / 2), pygame.display.get_window_size())
-    lawn = pygame.transform.scale(lawn, (lawnSize[0]*10, lawnSize[1]*10))
+    pygame.draw.rect(lawn, (19, 133, 16), pygame.Rect(x, y, 50, 50))
+    region = ((x - pygame.display.get_window_size()[0] / 2, y - pygame.display.get_window_size()[1] / 2), pygame.display.get_window_size())
     lawn.set_clip(region)
     display.blit(lawn, (0, 0), region)
     lawn = pygame.transform.scale(lawn, lawnSize)
 
-    coin.draw(x, y)
-
     playerObject.draw()
+
+    for coin in coins:
+        if coin.update(x, y):
+            coinCount += 1
+            removeCoin(coins.index(coin))
+            spawnCoin()
+        coin.draw(x, y)
 
     shopbutton.draw()
 
