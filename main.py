@@ -86,8 +86,9 @@ while not done:
 
     display.blit(background, (0, 0))
 
-    pygame.draw.rect(lawn, (19, 133, 16), pygame.Rect(x, y, 50, 50))
-    region = ((x - pygame.display.get_window_size()[0] / 2, y - pygame.display.get_window_size()[1] / 2), pygame.display.get_window_size())
+    pygame.draw.rect(lawn, (19, 133, 16), pygame.Rect(x, y, 4, 4))
+    region = ((x*10 - pygame.display.get_window_size()[0] / 2, y*10 - pygame.display.get_window_size()[1] / 2), pygame.display.get_window_size())
+    lawn = pygame.transform.scale(lawn, (lawnSize[0]*10, lawnSize[1]*10))
     lawn.set_clip(region)
     display.blit(lawn, (0, 0), region)
     lawn = pygame.transform.scale(lawn, lawnSize)
