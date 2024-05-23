@@ -25,6 +25,11 @@ imageHover = pygame.transform.scale(pygame.image.load('assets/shop_icon2.png'), 
 
 shopbutton = Button(display, 0, 0, imageIdle, imageHover)
 
+shop_open = False
+def draw_shop(surface):
+    imageShopmenu = pygame.transform.scale(pygame.image.load('assets/MOWER_SHOP.png'), (700, 550))
+    surface.blit(imageShopmenu, (display.get_width()/2 - imageShopmenu.get_width()/2, display.get_height()/2 - imageShopmenu.get_height()/2))
+
 speed, x, y = 7, 0, 0
 
 done = False
@@ -37,7 +42,7 @@ while not done:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if shopbutton.isOver(pygame.mouse.get_pos()):
-                print('clicked the button')
+                shop_open = not shop_open
 
     up = pygame.key.get_pressed()[pygame.K_UP] or pygame.key.get_pressed()[pygame.K_w]
     down = pygame.key.get_pressed()[pygame.K_DOWN] or pygame.key.get_pressed()[pygame.K_s]
@@ -76,6 +81,9 @@ while not done:
     playerObject.draw()
 
     shopbutton.draw()
+
+    if shop_open:
+        draw_shop(pygame.display.get_surface())
 
     display.blit(coinsText, (70, 10))
     pygame.display.update()

@@ -8,6 +8,7 @@ class Button:
         self.imageIdle = imageIdle
         self.imageHover = imageHover
 
+
     def draw(self):
         pos = pygame.mouse.get_pos()
 
@@ -24,3 +25,4 @@ class Button:
                 return True
 
         return False
+
