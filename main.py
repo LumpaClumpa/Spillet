@@ -7,7 +7,7 @@ import random
 
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont('MinecraftRegular', 35)
+font = pygame.font.SysFont('', 42)
 clock = pygame.time.Clock()
 
 gameWindowWidth, gameWindowHeight = pygame.display.Info().current_w, pygame.display.Info().current_h
@@ -112,5 +112,5 @@ while not done:
     if shop_open:
         draw_shop(pygame.display.get_surface())
 
-    display.blit(coinsText, (70, 10))
+    display.blit(coinsText, (75, 18))
     pygame.display.update()
