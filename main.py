@@ -16,7 +16,7 @@ display = pygame.display.set_mode((gameWindowWidth, gameWindowHeight))
 button_surface = pygame.Surface((120, 92))
 background = pygame.Surface((1920, 1080))
 
-lawnSize = (100, 100)
+lawnSize = (120, 120)
 lawn = pygame.Surface(lawnSize)
 lawn.fill((65, 152, 10))
 
@@ -26,17 +26,17 @@ coins = []
 coinCount = 0
 
 
-def spawnCoin():
-    x = random.randint(0, lawn.get_width())
-    y = random.randint(0, lawn.get_height())
-    coins.append(Coin(display, x, y))
+def spawnCoin(amount=1):
+    coinImage = pygame.image.load('assets/coin.png')
+    for x in range(amount):
+        coins.append(Coin(display, random.randint(1, lawn.get_width()*10 - coinImage.get_width()), random.randint(1, lawn.get_height()*10 - coinImage.get_height()), coinImage))
 
 
 def removeCoin(i):
     coins.pop(i)
 
 
-spawnCoin()
+spawnCoin(math.ceil(lawnSize[0] * lawnSize[1] / 1000))
 
 imageIdle = pygame.transform.scale(pygame.image.load('assets/shop_icon1.png'), (70, 60))
 imageHover = pygame.transform.scale(pygame.image.load('assets/shop_icon2.png'), (70, 60))
@@ -104,7 +104,6 @@ while not done:
         if coin.update(x, y):
             coinCount += 1
             removeCoin(coins.index(coin))
-            spawnCoin()
         coin.draw(x, y)
 
     shopbutton.draw()
