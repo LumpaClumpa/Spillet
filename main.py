@@ -38,15 +38,19 @@ def removeCoin(i):
 
 spawnCoin()
 
-imageIdle = pygame.transform.scale(pygame.image.load('assets/shop_icon1.png'), (70, 60))
-imageHover = pygame.transform.scale(pygame.image.load('assets/shop_icon2.png'), (70, 60))
+imageIdleShop = pygame.transform.scale(pygame.image.load('assets/shop_icon1.png'), (70, 60))
+imageHoverShop = pygame.transform.scale(pygame.image.load('assets/shop_icon2.png'), (70, 60))
+imageGrass = pygame.transform.scale(pygame.image.load('assets/grass_image.jpg'), (160, 50))
 
-shopbutton = Button(display, 0, 0, imageIdle, imageHover)
+imageShopmenu = pygame.transform.scale(pygame.image.load('assets/MOWER_SHOP.png'), (700, 550))
+
+shopbutton = Button(display, 0, 0, imageIdleShop, imageHoverShop)
+lawnupgrade = Button(display, display.get_width()/2 - 303, display.get_height()/2 - 100, imageGrass, imageGrass)
 
 shop_open = False
 def draw_shop(surface):
-    imageShopmenu = pygame.transform.scale(pygame.image.load('assets/MOWER_SHOP.png'), (700, 550))
     surface.blit(imageShopmenu, (display.get_width()/2 - imageShopmenu.get_width()/2, display.get_height()/2 - imageShopmenu.get_height()/2))
+    lawnupgrade.draw()
 
 speed, x, y = 1, 0, 0
 
@@ -62,6 +66,9 @@ while not done:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if shopbutton.isOver(pygame.mouse.get_pos()):
                 shop_open = not shop_open
+
+            if lawnupgrade.isOver(pygame.mouse.get_pos()) and shop_open:
+                lawnSize = (25, 25) #this is a test
 
     if frameCount % 2 == 0 and not shop_open:
         up = pygame.key.get_pressed()[pygame.K_UP] or pygame.key.get_pressed()[pygame.K_w]
